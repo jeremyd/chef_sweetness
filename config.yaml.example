@@ -1,0 +1,6 @@
+---
+:pass: mySuperSecurePass
+:user: myemail@example.com
+:rs_api_url: https://my.rightscale.com/api/acct/99999999999
+:inputs: TEST_INPUT_UNO TEST_INPUT_DOS
+:packages: emacs

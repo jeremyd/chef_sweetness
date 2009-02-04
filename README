@@ -1,0 +1,7 @@
+This is the RightScript git skeleton structure.
+
+init -> put your custom RightScript code here
+config.yaml.example -> example configuration for post back to rightscale
+lib -> place to put common shared libs
+attach -> store attachments here
+
