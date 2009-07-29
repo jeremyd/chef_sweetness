@@ -1,7 +1,8 @@
-This is the RightScript git skeleton structure.
+This is a blank repository you can use as a starting point for your
+local chef configuration. For full details on the parts aside from 
+information contained in the README files, see the Chef wiki document
 
-init -> put your custom RightScript code here
-config.yaml.example -> example configuration for post back to rightscale
-lib -> place to put common shared libs
-attach -> store attachments here
+http://wiki.opscode.com/display/chef/Chef+Repository
 
+This skeleton for the chef repository can be found on github here:
+git://github.com/opscode/chef-repo.git

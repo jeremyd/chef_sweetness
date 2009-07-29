@@ -1,6 +1,0 @@
----
-:script_id: 12345
-:inputs: TEST_INPUT_UNO TEST_INPUT_DOS
-:packages: emacs
-:nickname: example package
-:description: example description
