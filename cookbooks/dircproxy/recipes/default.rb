@@ -16,3 +16,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+
+remote_file "/tmp/#{node[:dircproxy][:source]}" do
+  source node[:dircproxy][:source]
+end
+
+bash "install dircproxy from source" do
+#    user "root"
+  dirname = node[:dircproxy][:source].gsub(/\.tar\.gz/,"")
+  cwd "/tmp"
+  code <<-EOH 
+  tar -zvxf #{node[:dircproxy][:source]}
+  cd #{dirname}
+  ./configure
+  make
+  make install
+  EOH
+end
