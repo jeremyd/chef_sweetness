@@ -17,8 +17,7 @@
 # limitations under the License.
 #
 
-
-remote_file "/tmp/#{node[:dircproxy][:source]}" do
+remote_file "/tmp/#{@node[:dircproxy][:source]}" do
   source node[:dircproxy][:source]
 end
 
@@ -33,4 +32,28 @@ bash "install dircproxy from source" do
   make
   make install
   EOH
+end
+
+user "dircproxy" do
+  username "dircproxy"
+  home "/home/dircproxy"
+  shell "/bin/true"
+end
+
+directory "/home/#{@node[:dircproxy][:switch_user]}" do
+  mode 0744
+  owner "dircproxy"
+end
+
+my_conf = "/home/#{@node[:dircproxy][:switch_user]}/.dircproxyrc"
+template my_conf do
+  source "dircproxy.conf.erb"
+  mode 400
+  owner @node[:dircproxy][:switch_user]
+  group @node[:dircproxy][:switch_user]
+end  
+
+execute "start dircproxy" do
+  command "dircproxy -f #{my_conf}"
+  user "dircproxy"
 end
