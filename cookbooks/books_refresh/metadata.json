@@ -1,0 +1,38 @@
+{
+  "attributes": {
+
+  },
+  "license": "Apache 2.0",
+  "maintainer": "Example Com",
+  "recommendations": {
+
+  },
+  "dependencies": {
+
+  },
+  "maintainer_email": "ops@example.com",
+  "suggestions": {
+
+  },
+  "name": "books_refresh",
+  "recipes": {
+    "books_refresh": ""
+  },
+  "description": "Installs\/Configures books_refresh",
+  "conflicting": {
+
+  },
+  "providing": {
+    "books_refresh": [
+
+    ]
+  },
+  "platforms": {
+
+  },
+  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n",
+  "version": "0.1.0",
+  "replacing": {
+
+  }
+}

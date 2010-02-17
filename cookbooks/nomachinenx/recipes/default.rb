@@ -40,8 +40,8 @@ service "ssh" do
   action [ :enable ]
 end
 
-user nomachine[:user] do
-  password nomachine[:pass]
+user node[:nomachinenx][:user] do
+  password node[:nomachinenx][:pass]
 end
 
 if node[:platform] == "ubuntu" || node[:platform] == "debian"
