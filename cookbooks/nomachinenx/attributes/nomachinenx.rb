@@ -1,3 +1,3 @@
-set_unless nomachine[:user] = "nomachine"
-set_unless nomachine[:pass] = "guest"
-set_unless nomachine[:ssh_port] = "22"
+set_unless nomachinenx[:user] = "nomachine"
+set_unless nomachinenx[:pass] = "guest"
+set_unless nomachinenx[:ssh_port] = "22"
