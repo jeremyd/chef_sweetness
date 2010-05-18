@@ -55,9 +55,20 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
 
 # Install nomachine debs
   ATTACH_DIR = ::File.join(::File.dirname(__FILE__), "..", "files", "default") 
-  packages = Dir.glob(File.join(ATTACH_DIR, "*#{node[:machine]}*"))
+  if node[:machine] == "x86_64"
+	  packages = Dir.glob(File.join(ATTACH_DIR, "*x86_64*"))
+else
+	  packages = Dir.glob(File.join(ATTACH_DIR, "*i386*"))
+end
+Chef::Log.info(node[:machine])
+Chef::Log.info packages.join(",")
+
+
   packages.each do |p|
-    package p
+    dpkg_package p do
+	source p
+	action :install
+end
   end
 
 end
