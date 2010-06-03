@@ -66,8 +66,8 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
   else
     packages = Dir.glob(File.join(ATTACH_DIR, "*i386*"))
   end
-  Chef::Log.info(node[:machine])
-  Chef::Log.info packages.join(",")
+#  Chef::Log.info(node[:machine])
+#  Chef::Log.info packages.join(",")
 
 
   packages.each do |p|
