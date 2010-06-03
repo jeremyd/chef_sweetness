@@ -51,7 +51,7 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
   end
 
 # Install xorg and gnome (or preferred desktop)
-  package "gnome"
+  package "gnome-core"
 
 # Install nomachine debs
   ATTACH_DIR = ::File.join(::File.dirname(__FILE__), "..", "files", "default") 
