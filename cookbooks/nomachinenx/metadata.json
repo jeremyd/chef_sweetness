@@ -1,69 +1,70 @@
 {
-  "attributes": {
-    "nomachinenx\/ssh_port": {
-      "default": "22",
-      "type": "string",
-      "description": "listen port for openssh server",
-      "multiple_values": false,
-      "display_name": "openssh server port",
-      "recipes": [
-        "nomachinenx::default"
-      ],
-      "required": false
+    "version": "0.1.0",
+    "providing": {
     },
-    "nomachinenx\/pass": {
-      "type": "string",
-      "description": "Passwod for your nomachine user account.",
-      "multiple_values": false,
-      "display_name": "nomachine Password",
-      "recipes": [
-        "nomachinenx::default"
-      ],
-      "required": true
+    "attributes": {
+      "nomachinenx/ssh_port": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "22",
+        "type": "string",
+        "recipes": [
+          "nomachinenx::default"
+        ],
+        "display_name": "openssh server port",
+        "description": "listen port for openssh server"
+      },
+      "nomachinenx/pass": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "nomachinenx::default"
+        ],
+        "display_name": "nomachine Password",
+        "description": "Passwod for your nomachine user account."
+      },
+      "nomachinenx/user": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "nomachinenx::default"
+        ],
+        "display_name": "nomachine User",
+        "description": "Username for your nomachine user account."
+      }
     },
-    "nomachinenx\/user": {
-      "type": "string",
-      "description": "Username for your nomachine user account.",
-      "multiple_values": false,
-      "display_name": "nomachine User",
-      "recipes": [
-        "nomachinenx::default"
-      ],
-      "required": true
-    }
-  },
-  "license": "Apache 2.0",
-  "maintainer": "",
-  "recommendations": {
-
-  },
-  "dependencies": {
-
-  },
-  "maintainer_email": "ops@example.com",
-  "suggestions": {
-
-  },
-  "name": "nomachinenx",
-  "recipes": {
-    "nomachinenx": "",
-    "nomachinenx::default": "installs nomachineNX"
-  },
-  "description": "Installs\/Configures nomachinenx",
-  "conflicting": {
-
-  },
-  "providing": {
-    "nomachinenx": [
-
-    ]
-  },
-  "platforms": {
-
-  },
-  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n",
-  "version": "0.1.0",
-  "replacing": {
-
+    "replacing": {
+    },
+    "dependencies": {
+    },
+    "groupings": {
+    },
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n",
+    "recommendations": {
+    },
+    "license": "Apache 2.0",
+    "maintainer": "",
+    "suggestions": {
+    },
+    "name": "nomachinenx",
+    "maintainer_email": "ops@example.com",
+    "recipes": {
+      "nomachinenx::default": "installs nomachineNX"
+    },
+    "conflicting": {
+    },
+    "platforms": {
+    },
+    "description": "Installs/Configures nomachinenx"
   }
-}
