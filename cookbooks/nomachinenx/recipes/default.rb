@@ -41,6 +41,12 @@ service "ssh" do
 end
 
 user node[:nomachinenx][:user] do
+  # if ruby-shadow is not installed TODO: need to install it.
+  # nomachine only supports password based logins afaik.
+  not_if do
+    # for now just check if it's installed and skip.
+    defined?(Shadow) == nil
+  end
   password node[:nomachinenx][:pass]
 end
 
@@ -57,18 +63,18 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
   ATTACH_DIR = ::File.join(::File.dirname(__FILE__), "..", "files", "default") 
   if node[:machine] == "x86_64"
 	  packages = Dir.glob(File.join(ATTACH_DIR, "*x86_64*"))
-else
-	  packages = Dir.glob(File.join(ATTACH_DIR, "*i386*"))
-end
-#Chef::Log.info(node[:machine])
-#Chef::Log.info packages.join(",")
+  else
+    packages = Dir.glob(File.join(ATTACH_DIR, "*i386*"))
+  end
+  Chef::Log.info(node[:machine])
+  Chef::Log.info packages.join(",")
 
 
   packages.each do |p|
     dpkg_package p do
-	source p
-	action :install
-end
+      source p
+      action :install
+    end
   end
 
 end
