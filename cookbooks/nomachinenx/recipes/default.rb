@@ -61,13 +61,13 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
 
 # Install nomachine debs
   ATTACH_DIR = ::File.join(::File.dirname(__FILE__), "..", "files", "default") 
-  if node[:machine] == "x86_64"
+  if node[:kernel][:machine] == "x86_64"
 	  packages = Dir.glob(File.join(ATTACH_DIR, "*x86_64*"))
   else
     packages = Dir.glob(File.join(ATTACH_DIR, "*i386*"))
   end
-#  Chef::Log.info(node[:machine])
-#  Chef::Log.info packages.join(",")
+  Chef::Log.info("node kernel machine was : #{node[:kernel][:machine]}")
+  Chef::Log.info packages.join(",")
 
 
   packages.each do |p|
