@@ -40,14 +40,12 @@ service "ssh" do
   action [ :enable ]
 end
 
-user node[:nomachinenx][:user] do
-  # if ruby-shadow is not installed TODO: need to install it.
-  # nomachine only supports password based logins afaik.
-  not_if do
-    # for now just check if it's installed and skip.
-    defined?(Shadow) == nil
+# if ruby-shadow is not installed TODO: need to install it.
+# nomachine only supports password based logins afaik.
+unless defined?(Shadow) == nil
+  user node[:nomachinenx][:user] do
+    password node[:nomachinenx][:pass]
   end
-  password node[:nomachinenx][:pass]
 end
 
 if node[:platform] == "ubuntu" || node[:platform] == "debian"
