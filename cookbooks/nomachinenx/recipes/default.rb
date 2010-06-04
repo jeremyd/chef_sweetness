@@ -69,8 +69,11 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
   Chef::Log.info("node kernel machine was : #{node[:kernel][:machine]}")
   Chef::Log.info packages.join(",")
 
+  client_first = packages.select {|p| p =~ /client/ }
+  then_node = packages.select {|p| p =~ /node/ }
+  finally_server = packages.select {|p| p =~ /server/ }
 
-  packages.each do |p|
+  (client_first + then_node + finally_server).each do |p|
     dpkg_package p do
       source p
       action :install
