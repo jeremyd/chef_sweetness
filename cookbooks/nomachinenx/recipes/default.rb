@@ -15,8 +15,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-#
 
 ssh_packages = case node[:platform]
   when "centos","redhat","fedora"
@@ -40,6 +38,7 @@ service "ssh" do
   action [ :enable ]
 end
 
+package "libshadow-ruby1.8"
 # if ruby-shadow is not installed TODO: need to install it.
 # nomachine only supports password based logins afaik.
 if defined?(Shadow) != nil
