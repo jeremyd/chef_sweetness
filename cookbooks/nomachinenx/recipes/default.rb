@@ -39,7 +39,7 @@ service "ssh" do
 end
 
 # if user is $ignore, then skip this step
-unless node[:nomachinenx][:user] == ""
+unless node[:nomachinenx][:user] == nil
   Chef::Log.info "Creating user for nomachine sessions: #{node[:nomachinenx][:user]}"
   user node[:nomachinenx][:user] do
     password node[:nomachinenx][:pass]
