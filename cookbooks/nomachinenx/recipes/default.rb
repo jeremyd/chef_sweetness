@@ -41,13 +41,13 @@ end
 package "libshadow-ruby1.8"
 # if ruby-shadow is not installed TODO: need to install it.
 # nomachine only supports password based logins afaik.
-if defined?(Shadow) != nil
+#if defined?(Shadow) != nil
   user node[:nomachinenx][:user] do
     password node[:nomachinenx][:pass]
   end
-else
-  Chef::Log.info("WARNING: ruby-shadow was not installed and NO USERS were created.\nYou must create a user and password manually to use nomachine!") 
-end
+#else
+#  Chef::Log.info("WARNING: ruby-shadow was not installed and NO USERS were created.\nYou must create a user and password manually to use nomachine!") 
+#end
 
 if node[:platform] == "ubuntu" || node[:platform] == "debian"
 
