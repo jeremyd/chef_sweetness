@@ -10,13 +10,13 @@ recipe "nomachinenx::default", "installs nomachineNX"
 
 attribute "nomachinenx/pass",
   :display_name => "nomachine Password",
-  :description => "Passwod for your nomachine user account.",
+  :description => "OPTIONAL: Password for your nomachine user account.",
   :required => false,
   :recipes => [ "nomachinenx::default" ]
 
 attribute "nomachinenx/user",
   :display_name => "nomachine User",
-  :description => "Username for your nomachine user account.",
+  :description => "OPTIONAL: Username for your nomachine user account. Set this to $ignore if you would like to create a user manually.",
   :required => false,
   :recipes => [ "nomachinenx::default" ]
 
