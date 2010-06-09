@@ -11,13 +11,13 @@ recipe "nomachinenx::default", "installs nomachineNX"
 attribute "nomachinenx/pass",
   :display_name => "nomachine Password",
   :description => "Passwod for your nomachine user account.",
-  :required => true,
+  :required => false,
   :recipes => [ "nomachinenx::default" ]
 
 attribute "nomachinenx/user",
   :display_name => "nomachine User",
   :description => "Username for your nomachine user account.",
-  :required => true,
+  :required => false,
   :recipes => [ "nomachinenx::default" ]
 
 attribute "nomachinenx/ssh_port",

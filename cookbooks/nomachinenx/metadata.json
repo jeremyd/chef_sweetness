@@ -18,7 +18,7 @@
         "description": "listen port for openssh server"
       },
       "nomachinenx/pass": {
-        "required": "required",
+        "required": "optional",
         "calculated": false,
         "choice": [
 
@@ -31,7 +31,7 @@
         "description": "Passwod for your nomachine user account."
       },
       "nomachinenx/user": {
-        "required": "required",
+        "required": "optional",
         "calculated": false,
         "choice": [
 
