@@ -18,15 +18,6 @@
 #
 #
 
-SANDBOX_BIN_DIR = "/opt/rightscale/sandbox/bin"
-r = gem_package "shadow" do
-  gem_binary "#{SANDBOX_BIN_DIR}/gem"
-  action :nothing
-end
-r.run_action(:install)
-
-Gem.clear_paths
-
 ssh_packages = case node[:platform]
   when "centos","redhat","fedora"
     %w{openssh-clients openssh}
