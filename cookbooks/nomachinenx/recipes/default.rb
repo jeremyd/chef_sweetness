@@ -38,7 +38,7 @@ service "ssh" do
   action [ :enable ]
 end
 
-unless node[:nomachine][:user] == nil
+unless node[:nomachinenx][:user] == nil
   user node[:nomachinenx][:user] do
     password node[:nomachinenx][:pass]
   end
@@ -74,7 +74,7 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
     end
   end
 
-  if node.nomachine.ssh_port != "22"
+  if node.nomachinenx.ssh_port != "22"
     Chef::Log.info "Configuring NX for non-standard SSH port: #{node.nomachine.ssh_port}"
     template "/usr/NX/etc/node.cfg" do
       source "node.cfg.erb"
