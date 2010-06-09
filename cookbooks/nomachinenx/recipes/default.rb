@@ -40,6 +40,7 @@ end
 
 # if user is $ignore, then skip this step
 unless node[:nomachinenx][:user] == ""
+  Chef::Log.info "Creating user for nomachine sessions: #{node[:nomachinenx][:user]}"
   user node[:nomachinenx][:user] do
     password node[:nomachinenx][:pass]
   end
