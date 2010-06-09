@@ -38,7 +38,8 @@ service "ssh" do
   action [ :enable ]
 end
 
-unless node[:nomachinenx][:user] == nil
+# if user is $ignore, then skip this step
+unless node[:nomachinenx][:user] == ""
   user node[:nomachinenx][:user] do
     password node[:nomachinenx][:pass]
   end
