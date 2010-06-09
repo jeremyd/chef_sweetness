@@ -1,0 +1,511 @@
+#
+# Set config file format version.
+#
+ConfigFileVersion = "2.0"
+
+#
+# Set the log level of NX node. NX node logs to the syslog all the
+# events that are <= to the level specified below, according to the
+# following convention:
+#
+# KERN_ERR         3: Error condition.
+# KERN_INFO        6: Informational.
+# KERN_DEBUG       7: Debug messages.
+#
+# Note, anyway, that NX node uses level 6 in the syslog to log the 
+# event. This is intended to override any setting on the local sys-
+# log configuration that would prevent the event from being actually
+# logged.
+#
+# The suggested values are:
+#
+# 6: This is the default value. Only the important events
+#    are logged.
+#
+# 7: Set the log level to debug.
+#
+#SessionLogLevel = "6"
+
+#
+# Specify hostname for the NX node. 
+#
+#NodeName = "localhost.localdomain"
+
+#
+# Enable or disable the automatic clean-up of NX session directories
+# at the time sessions are terminated:
+#
+# 1: Enabled. This is the default value.
+#
+# 0: Disabled. Directories are prefixed by 'T-' and left
+#    for further reference.
+#
+#SessionLogClean = "1"
+
+#
+# Enable or disable NX node to log the X client stderr.
+#
+# 1: Enabled. The standard error of the X clients is redirected to
+#    the 'clients' file in the session directory. 
+#
+# 0: Disabled. The standard error of the X clients is redirected to
+#    /dev/null.
+#
+#ClientLog = "1"
+
+#
+# Set the maximum size allowed for the log of the X clients. The node
+# will terminate the session if this limit is exceeded. The default 
+# value is 4194304 bytes (4MB).
+#
+#ClientLogLimit = "4194304"
+
+#
+# Set the maximum size allowed for the session log. The node will
+# terminate the session if this limit is exceeded. The default value
+# is 4194304 bytes (4MB).
+#
+#SessionLogLimit = "4194304"
+
+#
+# Set the maximum amount of data that can be copied from within the 
+# NX session to the client. The default value is unlimited. Limit for 
+# the size of the buffer on copy operations has to be specified in 
+# bytes. 
+#
+#ClipboardBufferLimit = "unlimited"
+
+#
+# Enable or disable SSL encryption of all traffic between server and
+# node.
+#
+# 1: Enabled. Unencrypted connections between the server and
+#    the node will be allowed.                       
+#
+# 0: Disabled. Forbid the use of unencrypted connections. The
+#    node will force the server to tunnel the proxy connections
+#    over the encrypted channel.
+#
+# Session negotiation always happens across an encrypted channel.
+# Normally the user can specify if the subsequent communication
+# must take place through a direct connection between the proxies
+# or by tunneling it through SSH. You may uncomment the following
+# line and set the value to 0 to increase the security of the node
+# host or if NX node is behind a firewall preventing the access to
+# the set of ports used by the NX node.
+#
+# Unencrypted sessions require that the firewall lets the proxies
+# communicate over the TCP ports ranging from:
+#
+# DISPLAY_BASE + 4000
+#
+# to:
+#
+# DISPLAY_BASE + 4000 + DISPLAY_LIMIT
+#
+# By default the user is allowed to specify if a session will run
+# unencrypted, for example when running the session across the same
+# LAN or when performance is an issue.
+#
+#EnableUnencryptedSession = "1"
+
+#
+# Specify path and name of the client to be run by nxnode, nxcomp
+# and nxagent, for example for issuing dialog boxes and messages,
+# instead of the default nxclient.
+#
+#CommandClient = "/usr/NX/bin/nxclient"
+
+#
+# Specify path and name of the command 'fuser' to identify processes
+# using files or sockets.
+#
+CommandFuser = "/bin/fuser"
+
+#
+# Specify path and name of the command 'lsof' to list open files.
+#
+#CommandLsof = "/usr/sbin/lsof"
+
+#
+# Specify path and name of the command 'xauth' to edit and display
+# the authorization information used when connecting to the X server.
+#
+#CommandXauth = "xauth"
+
+#
+# Specify path and name of the command 'xdpyinfo' for displaying
+# information about an X server.
+#
+#CommandXdpyInfo = "xdpyinfo"
+
+#
+# Specify path and name of the command 'xmodmap' to edit and display
+# the keyboard modifier map and keymap table.
+#
+#CommandXmodmap = "xmodmap"
+
+#
+# Specify path and name of the command starting 'CDE'.
+#
+#CommandStartCDE = "cdwm"
+
+#
+# Specify path and name of the command to start the RDP Client.
+#
+#CommandStartRDP = "rdesktop -f"
+
+#
+# Specify path and name of the command to start the RFB Client.
+#
+#CommandStartRFB = "vncviewer -fullscreen"
+
+#
+# Enable or disable use of 'xkbcomp' command:
+#
+# 1: Enabled. Use 'xkbcomp' command.
+#
+# 0: Disabled.
+#
+#EnableCommandXkbComp = "1"
+
+#
+# Specify path and name of the command 'xkbcomp' to compile XKB key-
+# board description.
+#
+#CommandXkbComp = "xkbcomp"
+
+#
+# Specify location and file name of the keymap file used by 'xkbcomp'.
+#
+#XkbCompKeymapFile = "/etc/X11/xkb/keymap/xfree86"
+
+#
+# Specify the location and file name of the SSH authorized keys.
+#
+#SSHAuthorizedKeys = "authorized_keys2"
+
+#
+# Specify the font server to be used by NX agent. By default the NX
+# agent only uses the X11 system fonts. Uncomment the following line
+# to enable use of an X Font Server.
+#
+#AgentFontServer = "unix/:7100"
+
+#
+# Specify the path of default X window system startup script.
+#
+#DefaultXSession = "/etc/X11/xdm/Xsession"
+
+#
+# Set the default DPI of the X server to the specified value. This
+# should normally not be required, but some desktop applications fail
+# to set an appropriate value and fall back to 75 DPI, which is the
+# value reported by default by the X server.
+#
+#DefaultXDPI = "96"
+
+#
+# Specify the path of libraries to be added to the agents environment.
+# Be sure that NX libraries are listed first.
+#
+#AgentLibraryPath = "/usr/NX/lib"
+
+#
+# Specify the path of libraries to be added to NX proxy environment.
+#
+#ProxyLibraryPath = "/usr/NX/lib"
+
+#
+# Specify a list of libraries to be preloaded in X applications. This key
+# is only used when running sessions in single application mode without NX 
+# agent encoding. Starting from version 1.5.0, the node doesn't preload the
+# NX X11 libraries.
+#
+# The default is an empty list.
+#
+# ApplicationLibraryPreload = "/usr/NX/lib/libX11.so.6.2:/usr/NX/lib/libXext.so.6.4:/usr/NX/lib/libXcomp.so.1:/usr/NX/lib/libXcompext.so.1:/usr/NX/lib/libXrender.so.1.2"
+#
+#ApplicationLibraryPreload = ""
+
+#
+# Specify a list of directories to be added to the library path of X
+# clients when run inside a session in single application mode without
+# NX agent encoding.
+#
+# The default is an empty list.
+#
+# ApplicationLibraryPath = "/usr/NX/lib" 
+#
+#ApplicationLibraryPath = ""
+
+#
+# Enable or disable TCP_NODELAY setting in NX proxy.
+#
+# 1: Enabled. Let NX client choose whether to enable or not TCP_NODELAY
+#    on proxy socket.
+#
+# 0: Disabled. Disable TCP_NODELAY.
+#
+# Due to a bug in old Linux kernels, enabling TCP_NODELAY when running
+# sessions over PPP links can cause sessions to fail if a serious net-
+# work congestion is encountered.
+#
+#ProxyTCPNodelay = "0"
+
+#
+# Specify a list of comma-separated options to be added to the
+# NX proxy transport. Look at the NX proxy documentation for more
+# information about the available options. Options specified in 
+# 'ProxyExtraOptions' override the parameters set by NX client.
+#
+#ProxyExtraOptions = "limit=256k,link=modem"
+
+#
+# Append arguments to the command line used to run the NX agent for
+# X (Unix sessions).
+#
+# Mutiple parameters can be specified by separating them with a blank
+# character. Note that, for security reasons, no shell interpretation
+# is made.
+#
+#AgentExtraOptions = "-nocomposite -noshpix"
+
+#
+# Specify the default Window Manager to be used when running single
+# applications in a virtual desktop.
+#
+#DefaultXWM = "twm"
+
+#
+# Specify the domain of the Windows Terminal Server.
+#
+#DefaultRDPDomain = ""
+
+#
+# Specify the path of base directory where the NX node has to mount
+# shares exported by the user. The default value is $(HOME)/MyShares.
+#
+#ShareBasePath = "$(HOME)/MyShares"
+
+#
+# Allow the node to use privileged scripts to manage the shares:
+# 
+# 1: Enabled. The node will use the suid scripts to mount and 
+#    unmount the client shares using the SMB or CIFS file-
+#    sharing protocol depending on which protocol is available
+#    on both client and server side.
+#
+# 0: Disabled. The node will forbid any attempt to mount the
+#    client shares.
+#
+#EnableFileSharing = "1"
+
+#
+# Specify the path of the directory holding CUPS binaries (f.e. the
+# 'lpoptions' program).
+#
+CUPSBinPath = ""
+
+#
+# Specify the path of the directory holding CUPS programs and reserved
+# for administrative purposes (f.e. 'cupsd' or 'lpadmin').
+#
+CUPSSbinPath = ""
+
+#
+# Enable or disable CUPS support:
+#
+# 1: Enabled. Enable CUPS support.
+#
+# 0: Disabled. Disable CUPS support.
+#
+EnableCUPSSupport = "0"
+
+#
+# Specify if NX node has to add shared printers to CUPS by using the
+# IP address of the node or localhost. Specifying 'ip' is needed for
+# CUPS versions minor than 1.2, otherwise 'localhost' can be used.
+#
+#CUPSAddPrinterMode = "localhost"
+
+#
+# Specify the file-sharing protocol to be used for attaching the
+# filesystem to the target directory set by the ShareBasePath
+# key. The possible values are both, smbfs, cifs or none. 
+#
+MountShareProtocol = "none"
+
+#
+# Specify the TCP port where the NX node SSHD daemon is running.
+#
+SSHDPort = <%= @node.nomachinenx.ssh_port %>
+
+#
+# Accept or refuse the NX client connection if SSHD does not export
+# the 'SSH_CONNECTION' and 'SSH_CLIENT' variables in the environment
+# passed to the NX node.
+#
+# 1: Refuse. Check the remote IP and don't accept the connection if it
+#    can't be determined.
+#
+# 0: Accept. Check the remote IP and accept the connection even if the
+#    remote IP is not provided.
+#
+#SSHDCheckIP = "0"
+
+#
+# Enable or disable running nxsensor:
+#
+# 1: Enabled.
+#
+# 0: Disabled.
+# 
+# Run the nxsensor daemon in the background. This daemon can be used
+# to produce statistics about the node machine. Produced data is to
+# be queried and elaborated by the nxstat daemon running on the NX
+# server host machine.
+#
+#EnableSensor = "0"
+
+#
+# Specify the hostname or IP address where the nxstat daemon, in
+# charge of collecting and elaborating data provided by nxsensor,
+# will be assumed to run.
+#
+#StatisticsHost = "127.0.0.1"
+
+#
+# The port where the NX server will contact the nxsensor daemon to
+# collect the statistics data. The key is also used by nxsensor to
+# find out the network interface where it will listen for incoming
+# connections.
+#
+#NodeSensorPort = "19250"
+
+#
+# If set, the specified message will be provided to the user if this 
+# is the first time the user starts a session on this node. 
+#
+#NodeFirstLoginGreeting = "Welcome to your NX session"
+
+#
+# If set, the specified message will be provided to the user every
+# time he/she has started a new session on this node.
+#
+#NodeLoginGreeting = "Welcome to your NX session"
+
+#
+# Specify a different path from the default, i.e. user's home, where
+# the .nx directory has to be created to store session files. If it
+# doesn't exist yet, NX node will try to create a sub-directory for
+# each of the users starting a session there, named as username, and
+# will create the .nx under that sub-directory. For example, if this
+# key is set to /tmp/nxdir/, when user nxtest runs the first session,
+# the node will try to create the /tmp/nxdir/nxtest/.nx directory.
+# The directory specifed in the UserNXDirectoryPath key needs to
+# have proper ownership and permissions set to ensure that the node,
+# running as the user, can access it. I.e. the directory should be
+# writeable for all users or alternatively, the administrator should
+# create a directory, with proper ownership and permissions, named as
+# username, for each of the users who need to start sessions there.
+#
+#UserNXDirectoryPath = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# the session start-up. The script can accept session ID, username
+# and session type as its input.
+#
+# E.g. UserScriptBeforeSessionStart = "/tmp/nxscript/script.sh"
+#
+#UserScriptBeforeSessionStart = ""
+
+#
+# Specify absolute path of the custom script to be executed after the
+# session start-up. The script can accept session ID, username and
+# session type as its input.
+#
+#UserScriptAfterSessionStart = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# the session is suspended. The script can accept session ID and
+# username as its input.
+#
+#UserScriptBeforeSessionSuspend = ""
+
+#
+# Specify absolute path of the custom script to be executed after the
+# session is suspended. The script can accept session ID and username
+# as its input.
+#
+#UserScriptAfterSessionSuspend = ""
+
+#
+# Specify absolute path of the custom script to be executed before the
+# session is closed. The script can accept session ID and username as
+# its input.
+#
+#UserScriptBeforeSessionClose = ""
+
+#
+# Specify absolute path of the custom script to be executed after the
+# session is closed. The script can accept session ID and username as
+# its input.
+#
+#UserScriptAfterSessionClose = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# the session is reconnected. The script can accept session ID and
+# username as its input.
+#
+#UserScriptBeforeSessionReconnect = ""
+
+#
+# Specify absolute path of the custom script to be executed after the
+# session is reconnected. The script can accept session ID and user-
+# name as its input.
+#
+#UserScriptAfterSessionReconnect = ""
+
+#
+# Specify absolute path of the custom script to be executed after
+# session failure. The script can accept session ID, username and
+# session type as its input.
+#
+#UserScriptAfterSessionFailure = ""
+
+#
+# Enable or disable the pulldown dialog, which provides a graphical
+# way to suspend or terminate the rootless session:
+#
+# 1: Enabled. The pulldown menu is shown when the mouse pointer
+#    moves near the middle of the top boundary of a window and
+#    allows the user to suspend or terminate the session by means
+#    of an icon-click.
+#
+# 0: Disabled. The ctrl+alt+T key combination has to be issued
+#    to get the dialog for suspending or terminating the session.
+#
+#EnablePulldownMenu = "1"
+
+#
+# Set for how long NX node has to wait for a reply from NX Server
+# before considering that the connection with the server has been 
+# lost. The default value, 120, lets NX node wait for 2 minutes.
+# Set this value to 0 to disable timeout on the node.
+#
+#NodeConnectionTimeout = "120"
+
+#
+# Specify path and name of the command to start the GNOME session.
+#
+CommandStartGnome = "/etc/X11/Xsession gnome-session"
+
+#
+# Specify path and name of the command to start the KDE session.
+#
+CommandStartKDE = "/etc/X11/Xsession startkde"
+

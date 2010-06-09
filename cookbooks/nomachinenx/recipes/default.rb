@@ -38,16 +38,11 @@ service "ssh" do
   action [ :enable ]
 end
 
-package "libshadow-ruby1.8"
-# if ruby-shadow is not installed TODO: need to install it.
-# nomachine only supports password based logins afaik.
-#if defined?(Shadow) != nil
+unless node[:nomachine][:user] == nil
   user node[:nomachinenx][:user] do
     password node[:nomachinenx][:pass]
   end
-#else
-#  Chef::Log.info("WARNING: ruby-shadow was not installed and NO USERS were created.\nYou must create a user and password manually to use nomachine!") 
-#end
+end
 
 if node[:platform] == "ubuntu" || node[:platform] == "debian"
 
@@ -79,4 +74,14 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
     end
   end
 
+  if node.nomachine.ssh_port != "22"
+    Chef::Log.info "Configuring NX for non-standard SSH port: #{node.nomachine.ssh_port}"
+    template "/usr/NX/etc/node.cfg" do
+      source "node.cfg.erb"
+    end
+    template "/usr/NX/etc/server.cfg" do
+      source "server.cfg.erb"
+    end
+  end
 end
+

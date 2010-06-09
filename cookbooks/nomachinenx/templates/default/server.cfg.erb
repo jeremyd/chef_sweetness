@@ -1,0 +1,790 @@
+#
+# Set config file format version.
+#
+ConfigFileVersion = "2.0"
+
+#
+# Set the log level of NX Server. NX server logs to the syslog all
+# the events that are <= to the level specified below, according to
+# the following convention:
+#
+# KERN_ERR         3: Error condition.
+# KERN_INFO        6: Informational.
+# KERN_DEBUG       7: Debug-level messages.
+#
+# Note, anyway, that NX server uses level 6 in the syslog to log the
+# event. This is intended to override any setting on the local syslog
+# configuration that would prevent the event from being actually logged.
+#
+# The suggested values are:
+#
+# 6: This is the default value. Only the important events
+#    are logged.
+#
+# 7: Sets logs to level debug.
+#
+#SessionLogLevel = "6"
+
+#
+# Specify hostname for the NX server.
+#
+#ServerName = "localhost.localdomain"
+
+#
+# Specify the TCP port where the NX server SSHD daemon is running.
+#
+SSHDPort = "<%= @node.nomachinenx.ssh_port %>"
+
+#
+# Set the base display number for NX sessions.
+#
+#DisplayBase = "1000"
+
+#
+# Set the maximum number of displays reserved for NX sessions.
+#
+#DisplayLimit = "200"
+
+#
+# Set the maximum number of concurrent NX sessions.
+#
+#SessionLimit = "20"
+
+#
+# Set the maximum number of concurrent NX sessions that can be run by
+# a single user. By default a user can run as many sessions as they
+# are allowed on the server. By setting this value to 1, the system
+# administrator can force the user to terminate any suspended session
+# before starting a new one.
+#
+#SessionUserLimit = "20"
+
+#
+# Set for how long NX server will retain data related to terminated
+# sessions in its session history.
+#
+# <0: Never delete data from NX session history.
+#
+#  0: Disable NX sessions history.
+#
+# >0: Keep data in session history for this amount
+#     of seconds.
+#
+# The default value, 2592000, lets NX server keep session data
+# for 30 days.
+#
+#SessionHistory = "2592000"
+
+#
+# Allow the root user to run NX sessions.
+#
+# 1: Enabled. Allow an NX user to run sessions as user with
+#    administrative rights.
+#
+# 0: Disabled. NX server forbids a NX user to log as user
+#    having administrative privileges.
+#
+#EnableAdministratorLogin = "0"
+
+#
+# Allow the server to terminate oldest suspended sessions:
+#
+# 1: Enabled. Enable the automatic kill of the suspended
+#    sessions.
+#
+# 0: Disabled. Suspended sessions are never terminated.
+#
+# When this option is set, and the server capacity has been reached,
+# i.e. the maximum number of concurrent sessions could be exceeded,
+# the server will kill the oldest suspended sessions to make room for
+# the new user.
+#
+#EnableAutokillSessions = "0"
+
+#
+# Enable persistent sessions for users. If the option is followed by
+# the keyword 'all', all users are allowed to run persistent sessions.
+# Alternatively, it can be followed by a list of comma-separated user-
+# names. The default value is 'all' which corresponds to enabling
+# persistent sessions for all users. Values specified are overriden
+# by the value set for the 'DisablePersistentSession' key.
+#
+#EnablePersistentSession = "all"
+
+#
+# Disable persistent sessions for users. If the option is followed by
+# the keyword 'all', no user is allowed to run persistent sessions. Al-
+# ternatively, the option can be followed by a list of comma-separated
+# usernames. The default value is the empty string which corresponds
+# to disabling persistent sessions for no user. The values specified
+# override the values set for the 'EnablePersistentSession' key.
+#
+#DisablePersistentSession = ""
+
+#
+# Enable or disable SSL encryption of all traffic.
+#
+#
+# 1: Enabled. Unencrypted connections between the proxies will
+#    be allowed.                                      
+#
+# 0: Disabled. Forbid the use of unencrypted connections. The
+#    server will force the client to tunnel the proxy
+#    connections over the encrypted channel.
+#
+# Session negotiation always happens across an encrypted channel.
+# Normally the user can specify if subsequent communication must
+# take place through a direct connection between the proxies or by
+# tunneling it through SSH. You may uncomment the following line
+# and set the value to 0 to increase the security of the host
+# server or if your NX server is behind a firewall preventing
+# the access to the set of ports used by the NX server.
+#
+# Unencrypted sessions require that the firewall lets the proxies
+# communicate over the TCP ports ranging from:
+#
+# DisplayBase + 4000
+#
+# to:
+#
+# DisplayBase + 4000 + DisplayLimit
+#
+# By default the user is allowed to specify if a session will run
+# unencrypted, for example when running the session across the
+# same LAN or when performance is an issue.
+#
+#EnableUnencryptedSession = "1"
+
+#
+# Enable or disable support for user profiles:
+#
+# 1: Enabled. The NX server allows the NX session to start
+#    according to the set of rules specified for the system
+#    or on a per-user basis.
+#
+# 0: Disabled. The NX server starts the session without apply-
+#    ing any rules.
+#
+# The administrator can configure access to applications and nodes
+# by creating a specific profile for the NX system, which will be
+# applied to any user starting a session on this server, or by def-
+# ining profiles on a per-user basis. Any profile consists of a set
+# of rules specifying what the user can or can't do in the session.
+#
+#EnableUserProfile = "0"
+
+#
+# Enable or disable clipboard:
+#
+# client: The content copied on the client can be pasted inside the
+#         NX session.
+#
+# server: The content copied inside the NX session can be pasted
+#         on the client.
+#
+# both:   The copy&paste operations are allowed between both the
+#         client and the NX session and viceversa.
+#
+# none:   The copy&paste operations between the client and the NX
+#         session are never allowed.
+#
+#EnableClipboard = "both"
+
+#
+# Enable or disable NX users DB:
+#
+# 1: Enabled. Only users listed in NX users DB can login to the NX
+#    server.
+#
+# 0: Disabled. All the authenticated users can login.
+#
+# If the NX user DB is disabled, any user providing a valid password
+# from local DB or through SSHD authentication, can connect to the NX
+# system. This is likely to be the default when SSHD authentication
+# with PAM is enabled.
+#
+#EnableUserDB = "0"
+
+#
+# Enable or disable NX password DB:
+#
+# 1: Enabled. Use NX password DB to authenticate users.
+#
+# 0: Disabled. Use SSHD + PAM authentication.
+#
+# System administrators can enable a restricted set of users to con-
+# nect to the NX server by setting EnableUserDB to 1 and adding
+# those users to the DB. If user is enabled to connect, his/her pass-
+# word will be verified against the current PAM settings by the SSHD
+# daemon.
+#
+# If both 'EnableUserDB' and 'EnablePasswordDB' are set to 0, any
+# user being authenticated by SSHD account will be enabled to connect
+# to the system.
+#
+EnablePasswordDB = "0"
+
+#
+# Specify hostname of the server used for NX SSH authentication.
+#
+#SSHDAuthServer = "127.0.0.1"
+
+#
+# Specify the TCP port where the SSHD daemon is running on the NX SSH
+# authentication server.
+#
+SSHDAuthPort = "<%= @node.nomachinenx.ssh_port %>"
+
+#
+# Enable or disable statistics:
+#
+# 1: Enabled. Enable the production of NX statistics.
+#
+# 0: Disabled. Disable the production of NX statistics.
+# 
+# Run the nxstat daemon in background. This daemon can be used to
+# produce statistics about the NX services and the node host machine
+# either for localhost and any of the available nodes when the load
+# balancing is enabled. This requires that the nxsensor daemon is
+# started on each of the node machines.
+#
+#EnableStatistics = "0"
+
+#
+# Specify the port where the server will contact the nxsensor daemons
+# to collect the statistics.
+#
+#ServerSensorPort = "19250"
+
+#
+# Enable or disable load balancing:
+#
+# 1: Enabled. Let  NX server decide the node host according to the
+#    hosts available in the NX Node DB.
+#
+# 0: Disabled. Start NX session on localhost.
+#
+#EnableLoadBalancing = "0"
+
+#
+# Enable or disable monitoring the NX Node host machines when load-
+# balancing is enabled in the NX Advanced Server configuration.
+#
+# 1: Enabled. Enable starting of the NX Server daemon.
+#
+# 0: Disabled. Disable starting of the NX Server daemon.
+#
+#EnableNodeMonitoring = "0"
+
+#
+# Set for how long the NX server daemon has to wait for a reply from
+# the node machine before considering that this host is unreachable.
+# The default value, 10, let NX server daemon to wait for 10 seconds.
+#
+#NodeResponseTimeout = "10"
+
+#
+# Specify a list of comma-separated 'hostname:port' values for XDM
+# server.
+#
+#RoundRobinXdmList = "localhost:177"
+
+#
+# Enable or disable the XDM round robin query:
+#
+# 1: Enabled. Let NX server decide XDM host according to hostnames
+#    that are defined in the RoundRobinXdmList key.
+#
+# 0: Disabled.
+#
+#EnableRoundRobinXdmQuery = "1"
+
+#
+# Enable or disable the XDM indirect query:
+#
+# 1: Enabled. Let the user obtain a list of available XDM hosts.
+#
+# 0: Disabled.
+#
+#EnableIndirectXdmQuery = "0"
+
+#
+# Enable or disable the XDM direct query:
+#
+# 1: Enabled. Let client specify XDM host.
+#
+# 0: Disabled.
+#
+#EnableDirectXdmQuery = "0"
+
+#
+# Enable or disable the XDM broadcast query:
+#
+# 1: Enabled. Let client connect to the first responding XDM host.
+#
+# 0: Disabled.
+#
+#EnableBroadcastXdmQuery = "0"
+
+#
+# Specify path and name of the command 'sessreg'.
+#
+#CommandSessreg = "/usr/X11R6/bin/sessreg"
+
+#
+# Specify the location and file name of the SSH authorized keys.
+#
+#SSHAuthorizedKeys = "authorized_keys2"
+
+#
+# Accept or refuse the NX client connection if SSHD does not export
+# the 'SSH_CONNECTION' and 'SSH_CLIENT' variables in the environment
+# passed to the NX server.
+#
+# 1: Refuse. Check the remote IP and don't accept the connection
+#    if it can't be determined.
+#
+# 0: Accept. Check the remote IP and accept the connection even if
+#    the remote IP is not provided.
+#
+#SSHDCheckIP = "0"
+
+#
+# Enable or disable support for automatic provision of NX guest users:
+#
+# 1: Enabled. The NX server creates system accounts for guest users.
+#
+# 0: Disabled.
+#
+#EnableGuestUser = "0"
+
+#
+# Specify the base username to be used by NX server to create guest
+# users accounts. The server will add a progressive number to the
+# name specified by GuestName, according to the range of values set
+# in the BaseGuestUserId and GuestUserIdLimit keys.
+#
+#GuestName = "guest"
+
+#
+# Set the base User Identifier (UID) number for NX guest users.
+#
+#BaseGuestUserId = "10"
+
+#
+# Set the maximum User Identifier (UID) number reserved for NX guest
+# users.
+#
+#GuestUserIdLimit = "200"
+
+#
+# Set the Group Identifier (GID) for NX guest users. The specified
+# GID must already exist on the system.
+#
+#GuestUserGroup = "guest"
+
+#
+# Set the maximum number of concurrent NX guest users.
+#
+#GuestUserLimit = "10"
+
+#
+# Set the maximum number of NX sessions a NX guest user can run before
+# his/her account is terminated.
+#
+#GuestUserConnectionLimit = "5"
+
+#
+# Set for how long the NX server has to retain NX guest users accounts.
+#
+#  0: NX guest users accounts are never removed.
+#
+# >0: Maintain NX guest users accounts for this amount
+#     of seconds.
+#
+# The default value, 2592000, lets NX server keep guest users accounts
+# for 30 days.
+#
+#GuestUserAccountExpiry = "2592000"
+
+#
+# Set for how long the NX server has to keep alive a NX guest user's
+# session. When the time is expired, NX server will kill the session.
+#
+#  0: NX guest user's session is never terminated.
+#
+# >0: Keep alive NX guest user' session for this amount
+#     of seconds.
+#
+#GuestConnectionExpiry = "0"
+
+#
+# Enable or disable possibility for NX guest users to suspend sessions:
+#
+# 1: Enabled. The NX server lets NX guest users suspend sessions.
+#
+# 0: Disabled.
+#
+#GuestUserAllowSuspend = "1"
+
+#
+# Set the home directory for NX guest users. If an empty value is
+# specified, the NX server will create the guest user's home in the
+# default directory set on the system. 
+#
+#GuestUserHome = "/home"
+
+#
+# Enable or disable removing the guest user from the system when the
+# account is expired:
+#
+# 1: Enabled. When the guest account is expired, the NX server will
+#    delete the account from both the system and the NX guests DB
+#    and will remove the home directory.
+#
+# 0: Disabled. When the guest account is expired, the NX server will
+#    keep the guest account on the system but will forbid this user
+#    to start new sessions on the server.
+#
+#EnableGuestWipeout = "1"
+
+#
+# Allow the server to set disk quota for the guest accounts:
+#
+# 1: Enabled. When a new guest account is created on the system,
+#    the server will set the disk quota for this user.
+#
+# 0: Disabled. No restrictions on the amount of disk space used
+#    by each guest user are applied.
+#
+#EnableGuestQuota = "0"
+
+#
+# Specify the username of the account to be used as a protoype for
+# propagating its disk quota settings to all the new guest accounts.
+# If the softlimit or the hardlimit on either the inode or the disk
+# block are set, they will override the settings applied to the user
+# prototype.
+#
+#GuestQuotaProtoname = "protoguest"
+
+#
+# Specify the maximum amount of disk space available for each of the
+# guest users, checked as number of inodes. This limit can be exceeded
+# for the grace period.
+#
+#GuestQuotaInodeSoftlimit = "0"
+
+#
+# Specify the absolute maximum amount of disk space available for
+# each of the guest users, checked as number of inodes. Once this
+# limit is reached, no further disk space can be used.
+#
+#GuestQuotaInodeHardlimit = "0"
+
+#
+# Specify the maximum amount of disk space available for each of the
+# guest users, checked as number of disk blocks consumed. This limit
+# can be exceeded for the grace period.
+#
+#GuestQuotaBlockSoftlimit = "0"
+
+#
+# Specify the absolute maximum amount of disk space available for each
+# of the guest users, checked as number of disk blocks consumed. Once
+# this limit is reached, no further disk space can be used.
+#
+#GuestQuotaBlockHardlimit = "0"
+
+#
+# Specify the grace period, expressed in seconds, during which the
+# soft limit, set in the GuestQuotaInodeSoftlimit key may be
+# exceeded.
+#
+#GuestQuotaInodeGracePeriod = "0"
+
+#
+# Specify the grace period, expressed in seconds, during which the
+# soft limit, set in the GuestQuotaBlockSoftlimit key may be
+# exceeded.
+#
+#GuestQuotaBlockGracePeriod = "0"
+
+#
+# Specify a list of comma-separated filesystem names or devices to
+# which the disk quota restrictions will be applied. The default
+# value is 'all' which corresponds to applying the disk quota limits
+# to all the filesystems having disk quota enabled.
+#
+#GuestQuotaFilesystems = "all"
+
+#
+# Set the User Identifier (UID) number for NX users. If an empty value
+# is specified, the NX server will create the account with the default
+# value set on the system.
+#
+#UserId = "10"
+
+#
+# Set the Group Identifier (GID) for NX users. If an empty value is
+# specified, the NX server will create the account with the default
+# value set on the system.
+#
+#UserGroup = "users"
+
+#
+# Set the home directory for NX users. If an empty value is specified,
+# the NX server will create the user's home in the default directory
+# set on the system.
+#
+#UserHome = "/home"
+
+#
+# Allow session shadowing on this server:
+#
+# 1: Enabled.  Each user can require to attach to an already running
+#    session. The session owner has to accept connection.
+#
+# 0: Disabled. Session shadowing is forbidden.
+#
+#EnableSessionShadowing = "1"
+
+#
+# Allow session shadowing in interactive mode:
+#
+# 1: Enabled. User attaching to the session can interact with
+#    the session.
+#
+# 0: Disabled. The session is shadowed in view-only mode. User
+#    attaching to the session can't interact with the session.
+#
+#EnableInteractiveSessionShadowing = "1"
+
+#
+# Enable or disable NX server requiring authorization to the owner
+# of the NX session before sharing the session.
+#
+# 1: Enabled. NX server asks for authorization to the owner
+#    of the master session before trying to share the session.
+#
+# 0: Disabled. NX server tries to share the NX session without
+#    the need of any authorization from the owner of the master
+#    desktop.
+#
+#EnableSessionShadowingAuthorization = "1"
+
+#
+# Allow desktop sharing on this server:
+#
+# 1: Enabled. User can require to attach to the native display
+#    of the nodes. The desktop's owner has to accept connection.
+#
+# 0: Disabled. Desktop sharing is forbidden.
+#
+#EnableDesktopSharing = "1"
+
+#
+# Allow desktop sharing in interactive mode:
+#
+# 1: Enabled. User attaching to the desktop can interact with
+#    the session.
+#
+# 0: Disabled. The session is shadowed in view-only mode. User
+#    attaching to the desktop can't interact with the session.
+#
+#EnableInteractiveDesktopSharing = "1"
+
+#
+# Allow the NX user to connect to a desktop owned by a user who is
+# not an NX user:
+#
+# 1: Enabled. Allow an NX user to connect to a desktop owned
+#    by a user who is not an NX user. This requires running a
+#    privileged script as root and will work only if the node
+#    is the same machine where NX server is running.
+#
+# 0: Disabled. An NX user can connect only to a desktop owned
+#    by an NX user when EnableDesktopSharing is enabled.
+#
+#EnableFullDesktopSharing = "0"
+
+#
+# Allow the NX user to connect to a desktop owned by root:
+#
+# 1: Enabled. Allow an NX user to connect to a desktop owned by
+#    root (or Administrator on a Windows machine). This requires
+#    EnableFullDesktopSharing to be enabled.
+#
+# 0: Disabled. A NX user is forbidden to connect to a desktop
+#    owned by root.
+#
+#EnableAdministratorDesktopSharing = "0"
+
+#
+# Enable or disable NX server requiring authorization to the owner
+# of the desktop before sharing the session.
+#
+# 1: Enabled. NX server asks for authorization to the owner
+#    of the desktop.
+#
+# 0: Disabled. NX server tries to share the native display
+#    without the need of any authorization from the owner
+#    of the desktop.
+#
+#EnableDesktopSharingAuthorization = "1"
+
+#
+# Enable or disable NX server requiring authorization before sharing
+# the session either when the X server is running as root or gdm.
+#
+# 1: Enabled. NX server needs authorization to proceed with
+#    sharing the session.
+#
+# 0: Disabled. NX server tries to share the native display
+#    without the need for any authorization. Sharing the
+#    session is also possible when a user is not logged
+#    on to the local desktop.
+#
+#EnableSystemDesktopSharingAuthorization = "1"
+
+#
+# Specify absolute path of the custom script to be executed before
+# the user logs in. The script can accept remote IP of the user's
+# machine as its input.
+#
+# E.g. UserScriptBeforeLogin = "/tmp/nxscript/script.sh"
+#
+#UserScriptBeforeLogin = ""
+
+#
+# Specify absolute path of the custom script to be executed after
+# the user logs in. The script can accept username as its input.
+#
+#UserScriptAfterLogin = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# the session start-up. The script can accept session ID, username,
+# node host and node port as its input.
+#
+#UserScriptBeforeSessionStart = ""
+
+#
+# Specify absolute path of the custom script to be executed after the
+# session start-up. The script can accept session ID, username, node
+# host and node port as its input.
+#
+#UserScriptAfterSessionStart = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# the session is closed. The script can accept session ID, username,
+# node host and node port as its input.
+#
+#UserScriptBeforeSessionClose = ""
+
+#
+# Specify absolute path of the custom script to be executed after the
+# session is closed. The script can accept session ID, username, node
+# host and node port as its input.
+#
+#UserScriptAfterSessionClose = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# the session is reconnected. The script can accept session ID user-
+# name, node host and node port as its input.
+#
+#UserScriptBeforeSessionReconnect = ""
+
+#
+# Specify absolute path of the custom script to be executed after the
+# session is reconnected. The script can accept session ID username
+# node host and node port as its input.
+#
+#UserScriptAfterSessionReconnect = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# the session is suspended. The script can accept session ID, user-
+# name, node host and node port as its input.
+#
+#UserScriptBeforeSessionSuspend = ""
+
+#
+# Specify absolute path of the custom script to be executed after
+# the session is suspended. The script can accept session ID, user-
+# name, node host and node port as its input.
+#
+#UserScriptAfterSessionSuspend = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# session failure. The script can accept session ID username, node
+# host and node port as its input.
+#
+#UserScriptBeforeSessionFailure = ""
+
+#
+# Specify absolute path of the custom script to be executed after
+# session failure. The script can accept session ID username, node
+# host and node port as its input.
+#
+#UserScriptAfterSessionFailure = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# NX Server creates the new account. The script can accept username
+# as its input.
+#
+#UserScriptBeforeCreateUser = ""
+
+#
+# Specify absolute path of the custom script to be executed after
+# NX Server has created the new account. The script can accept user-
+# name as its input.
+#
+#UserScriptAfterCreateUser = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# NX Server removes the account. The script can accept username as
+# its input.
+#
+#UserScriptBeforeDeleteUser = ""
+
+#
+# Specify absolute path of the custom script to be executed after
+# NX Server has removed the account. The script can accept username
+# as its input.
+#
+#UserScriptAfterDeleteUser = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# NX Server disables the user. The script can accept username as its
+# input.
+#
+#UserScriptBeforeDisableUser = ""
+
+#
+# Specify absolute path of the custom script to be executed after
+# NX Server has disabled the user. The script can accept username
+# as its input.
+#
+#UserScriptAfterDisableUser = ""
+
+#
+# Specify absolute path of the custom script to be executed before
+# NX Server enables the user. The script can accept username as its
+# input.
+#
+#UserScriptBeforeEnableUser = ""
+
+#
+# Specify absolute path of the custom script to be executed after
+# NX Server has enabled the user. The script can accept username
+# as its input.
+#
+#UserScriptAfterEnableUser = ""
+
