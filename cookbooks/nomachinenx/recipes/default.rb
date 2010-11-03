@@ -65,16 +65,14 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
   Chef::Log.info("node kernel machine was : #{node[:kernel][:machine]}")
   Chef::Log.info packages.join(",")
 
-  client_first = packages.select {|p| p =~ /client/ }
-  then_node = packages.select {|p| p =~ /node/ }
-  finally_server = packages.select {|p| p =~ /server/ }
-
-  (client_first + then_node + finally_server).each do |p|
-    dpkg_package p do
-      source p
-      action :install
-    end
-  end
+	ruby_block "install python-vm-builder debs with dependencies" do
+		block do
+			packages.each do |deb|
+				Chef::Log.info(`dpkg -i #{deb}`)
+			end
+			Chef::Log.info(`apt-get -fy install`)
+		end
+	end
 
   if node.nomachinenx.ssh_port != "22"
     Chef::Log.info "Configuring NX for non-standard SSH port: #{node.nomachine.ssh_port}"
