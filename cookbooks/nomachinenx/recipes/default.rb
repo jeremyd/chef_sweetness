@@ -76,7 +76,7 @@ if node[:platform] == "ubuntu" || node[:platform] == "debian"
 	end
 
   if node.nomachinenx.ssh_port != "22"
-    Chef::Log.info "Configuring NX for non-standard SSH port: #{node.nomachine.ssh_port}"
+    Chef::Log.info "Configuring NX for non-standard SSH port: #{node.nomachinenx.ssh_port}"
     template "/usr/NX/etc/node.cfg" do
       source "node.cfg.erb"
     end
