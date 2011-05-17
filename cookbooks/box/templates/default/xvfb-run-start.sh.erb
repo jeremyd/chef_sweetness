@@ -1,0 +1,58 @@
+#!/bin/bash
+
+#/usr/bin/xvfb-run -s "-screen 0 800x600x16" -n0 -a blackbox
+
+#!/bin/bash
+#
+# /etc/rc.d/init.d/xvfbd
+#
+# chkconfig: 345 95 28
+# description: Starts/Stops X Virtual Framebuffer server
+# processname: Xvfb
+#
+	
+	
+. /lib/lsb/init-functions
+
+[ "${NETWORKING}" = "no" ] && exit 0
+	
+PROG="/usr/bin/Xvfb"
+PROG_OPTIONS=":0 -screen 0 800x600x16"
+PROG_OUTPUT="/$HOME/Xvfb.out"
+WIN_MANAGER="blackbox"
+	
+case "$1" in
+    start)
+        echo -n "Starting : X Virtual Frame Buffer "
+        $PROG $PROG_OPTIONS>>$PROG_OUTPUT 2>&1 &
+        disown -ar
+        /bin/sleep 5
+	DISPLAY=:0 $WIN_MANAGER 2>&1 &
+        RETVAL=$?
+        if [ $RETVAL -eq 0 ]; then
+            pidof -o  %PPID -x Xvfb > ~/bin/Xvfb.pid
+        fi
+        echo
+   		;;
+    stop)
+        echo -n "Shutting down : X Virtual Frame Buffer"
+        pkill Xvfb
+        RETVAL=$?
+        [ $RETVAL -eq 0 ] && /bin/rm -f ~/bin/Xvfb.pid
+        echo
+        ;;
+    restart|reload)
+    	$0 stop
+    	$0 start
+        RETVAL=$?
+      	;;
+    status)
+        ps auxww|grep $(cat ~/bin/Xvfb.pid)
+	RETVAL=$?
+    	;;
+    *)
+     echo $"Usage: $0 (start|stop|restart|reload|status)"
+     exit 1
+esac
+	
+exit $RETVAL

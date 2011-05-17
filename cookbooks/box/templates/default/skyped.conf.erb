@@ -1,0 +1,10 @@
+[skyped]
+username = <%= @node.box.skype_username %>
+cert = /home/<%= @node.box.user %>/skyped/skyped.cert.pem
+key  = /home/<%= @node.box.user %>/skyped/skyped.key.pem
+port = 2727
+# use `echo -n foo|sha1sum` to generate this hash for your password
+<% require 'digest/sha1' %>
+<% digest = Digest::SHA1.new %>
+<% hashed_pw = digest.hexdigest(@node.box.skype_password) %>
+password = <%= hashed_pw %>
