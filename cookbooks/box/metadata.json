@@ -1,70 +1,83 @@
 {
-  "name": "box",
   "description": "Installs/Configures myl33tbox",
-  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n",
-  "maintainer": "Rubyonlinux",
-  "maintainer_email": "na",
-  "license": "Apache 2.0",
-  "platforms": {
-  },
-  "dependencies": {
-  },
-  "recommendations": {
-  },
-  "suggestions": {
-  },
-  "conflicting": {
-  },
   "providing": {
-  },
-  "replacing": {
-  },
-  "attributes": {
-    "box/user": {
-      "display_name": "Username you want to use to login to your l33tbox",
-      "type": "string",
-      "required": "required",
-      "recipes": [
-        "box::packages",
-        "box::templates"
-      ],
-      "choice": [
-
-      ],
-      "calculated": false
-    },
-    "box/skype_username": {
-      "display_name": "Your Skype username is required for use of l33tbox with Skype.",
-      "type": "string",
-      "required": "optional",
-      "recipes": [
-        "box::packages",
-        "box::templates"
-      ],
-      "choice": [
-
-      ],
-      "calculated": false
-    },
-    "box/skype_password": {
-      "display_name": "Your Skype password is required for use of l33tbox with Skype.  It will only be stored on the box as a SHA1 hash.",
-      "type": "string",
-      "required": "optional",
-      "recipes": [
-        "box::packages",
-        "box::templates"
-      ],
-      "choice": [
-
-      ],
-      "calculated": false
-    }
-  },
-  "groupings": {
   },
   "recipes": {
     "box::packages": "installs all necessary packages for l33tness",
     "box::templates": "the rest"
   },
-  "version": "0.1.0"
+  "maintainer": "Rubyonlinux",
+  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n",
+  "replacing": {
+  },
+  "maintainer_email": "na",
+  "groupings": {
+  },
+  "recommendations": {
+  },
+  "platforms": {
+  },
+  "license": "Apache 2.0",
+  "version": "0.1.0",
+  "suggestions": {
+  },
+  "name": "box",
+  "attributes": {
+    "box/authorized_keys": {
+      "required": "required",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+        "box::packages",
+        "box::templates"
+      ],
+      "display_name": "Authorized keys file in ~/.ssh/authorized_keys for user"
+    },
+    "box/skype_username": {
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+        "box::packages",
+        "box::templates"
+      ],
+      "display_name": "Your Skype username is required for use of l33tbox with Skype."
+    },
+    "box/user": {
+      "required": "required",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+        "box::packages",
+        "box::templates"
+      ],
+      "display_name": "Username you want to use to login to your l33tbox"
+    },
+    "box/skype_password": {
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+        "box::packages",
+        "box::templates"
+      ],
+      "display_name": "Your Skype password is required for use of l33tbox with Skype.  It will only be stored on the box as a SHA1 hash."
+    }
+  },
+  "conflicting": {
+  },
+  "dependencies": {
+  }
 }

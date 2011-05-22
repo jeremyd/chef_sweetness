@@ -179,5 +179,7 @@ if node.platform == 'ubuntu' && node.platform_version == '11.04'
   package 'dircproxy'
 
   package 'expect'
+
+  package 'monit'
   
 end

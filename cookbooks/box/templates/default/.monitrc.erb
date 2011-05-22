@@ -1,0 +1,6 @@
+set daemon 30 # Poll at 2-minute intervals
+
+check process skyped
+           with pidfile "/home/jeremy/skyped/skyped.pid"
+           start program = "/home/jeremy/bin/skyped-start.sh"
+           stop = "true" # no stop program yet ..

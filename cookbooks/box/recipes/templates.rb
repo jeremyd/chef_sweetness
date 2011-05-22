@@ -5,16 +5,7 @@ user node.box.user do
 end
 directory "/home/#{node.box.user}" do
   recursive true
-  owner node.box.user
-  group node.box.user
-end
-template "/home/#{node.box.user}/.dircproxy-freenode" do
-  source ".dircproxy-freenode.erb"
-  owner node.box.user
-  group node.box.user
-end
-template "/home/#{node.box.user}/.dircproxy-bitlbee" do
-  source ".dircproxy-bitlbee.erb"
+  mode "0700"
   owner node.box.user
   group node.box.user
 end
@@ -37,6 +28,15 @@ directory "/home/#{node.box.user}/bin" do
   recursive true
   owner node.box.user
   group node.box.user
+end
+directory "/home/#{node.box.user}/.ssh" do
+  recursive true
+  owner node.box.user
+  group node.box.user
+end
+template "/home/#{node.box.user}/.ssh/authorized_keys" do
+  source "authorized_keys.erb"
+  mode "0600"
 end
 template "/home/#{node.box.user}/bin/xvfb-run-start.sh" do
   source "xvfb-run-start.sh.erb"
@@ -62,6 +62,12 @@ template "/home/#{node.box.user}/bin/skyped-start.sh" do
   owner node.box.user
   group node.box.user
 end
+template "/home/#{node.box.user}/.monitrc" do
+  source ".monitrc.erb"
+  mode "0600"
+  owner node.box.user
+  group node.box.user
+end
 bash "run skype openssl cert generation using expect script" do
   #not_if "test -f /home/#{node.box.user}/skyped/skyped.key.pem"
   user node.box.user 
@@ -84,9 +90,15 @@ bash "run x11vnc" do
   group node.box.user
   code "/home/#{node.box.user}/bin/x11vnc-start.sh"
 end
-bash "run skyped" do
-  environment "HOME" => "/home/#{node.box.user}", "DISPLAY" => ":0"
+#bash "run skyped" do
+#  environment "HOME" => "/home/#{node.box.user}", "DISPLAY" => ":0"
+#  user node.box.user
+#  group node.box.user
+#  code "/home/#{node.box.user}/bin/skyped-start.sh"
+#end
+bash "run monit (skyped)" do
+  environment "HOME" => "/home/#{node.box.user}"
   user node.box.user
   group node.box.user
-  code "/home/#{node.box.user}/bin/skyped-start.sh"
+  code "/usr/sbin/monit -l /home/jeremy/monit.log"
 end
