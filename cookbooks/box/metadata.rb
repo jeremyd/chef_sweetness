@@ -10,6 +10,6 @@ recipe "box::templates", "the rest"
 all_recipes = ["box::packages", "box::templates"]
 
 attribute "box/user", :display_name => "Username you want to use to login to your l33tbox", :type => "string", :required => true, :recipes => all_recipes
-attribute "box/authorized_keys", :display_name => "Authorized keys file in ~/.ssh/authorized_keys for user", :type => "string", :required => true, :recipes => all_recipes
+attribute "box/authorized_keys", :display_name => "Authorized keys file in ~/.ssh/authorized_keys for user", :type => "string", :required => false, :recipes => all_recipes
 attribute "box/skype_username", :display_name => "Your Skype username is required for use of l33tbox with Skype.", :type => "string", :required => false, :recipes => all_recipes
 attribute "box/skype_password", :display_name => "Your Skype password is required for use of l33tbox with Skype.  It will only be stored on the box as a SHA1 hash.", :type => "string", :required => false, :recipes => all_recipes
