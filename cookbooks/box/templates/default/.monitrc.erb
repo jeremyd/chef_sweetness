@@ -1,6 +1,6 @@
 set daemon 30 # Poll at 2-minute intervals
 
 check process skyped
-           with pidfile "/home/<%= @node.box.user %>/skyped/skyped.pid"
-           start program = "/home/<%= @node.box.user %>/bin/skyped-start.sh"
-           stop = "true" # no stop program yet ..
+           with pidfile "<%= @users_home %>/skyped/skyped.pid"
+           start program = "<%= @users_home %>/bin/skyped-start.sh"
+           stop = "/bin/true" # no stop program yet ..

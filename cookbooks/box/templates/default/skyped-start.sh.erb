@@ -1,6 +1,6 @@
 #!/bin/bash
-echo -e 'starting skyped.. logging to /home/<%= @node.box.user %>/skyped/skyped.log, pidfile: /home/<%= @node.box.user %>/skyped/skyped.pid'
+echo -e 'starting skyped.. logging to <%= @users_home %>/skyped/skyped.log, pidfile: <%= @users_home %>/skyped/skyped.pid'
 export DISPLAY=:0
-export HOME=/home/<%= @node.box.user %>
+export HOME=<%= @users_home %>
 export USER=<%= @node.box.user %>
-skyped -c /home/<%= @node.box.user %>/skyped/skyped.conf -l /home/<%= @node.box.user %>/skyped/skyped.log |cut -d: -f2 > /home/<%= node.box.user %>/skyped/skyped.pid
+skyped -c <%= @users_home %>/skyped/skyped.conf -l <%= @users_home %>/skyped/skyped.log |cut -d: -f2 > <%= @users_home %>/skyped/skyped.pid

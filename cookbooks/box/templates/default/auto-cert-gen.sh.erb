@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/bin/openssl req -new -x509 -days 365 -nodes -subj "/C=AU/ST=NSW/L=Sydney/O=MyCompany/CN=myserver.net/CN=www.myserver.net/emailAddress=<%= @node.box.user %>@myl33tbox.com" -out /home/<%= @node.box.user %>/skyped/skyped.cert.pem -keyout /home/<%= @node.box.user %>/skyped/skyped.key.pem
+/usr/bin/openssl req -new -x509 -days 365 -nodes -subj "/C=AU/ST=NSW/L=Sydney/O=MyCompany/CN=myserver.net/CN=www.myserver.net/emailAddress=<%= @node.box.user %>@myl33tbox.com" -out <%= @users_home %>/skyped/skyped.cert.pem -keyout <%= @users_home %>/skyped/skyped.key.pem

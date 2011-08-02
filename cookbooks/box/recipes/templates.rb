@@ -1,72 +1,85 @@
 log "user was #{node.box.user}"
-user node.box.user do
-  home "/home/#{node.box.user}"
-  shell "/bin/bash"
+if node.box.user == "root"
+  users_home = "/root"
+else
+  users_home = "/home/#{node.box.user}"
 end
-directory "/home/#{node.box.user}" do
+unless node.box.user == 'root'
+  user node.box.user do
+    home users_home
+    shell "/bin/bash"
+  end
+  directory users_home do
+    recursive true
+    mode "0700"
+    owner node.box.user
+    group node.box.user
+  end
+end
+directory "#{users_home}/skyped" do
   recursive true
-  mode "0700"
   owner node.box.user
   group node.box.user
 end
-directory "/home/#{node.box.user}/skyped" do
-  recursive true
-  owner node.box.user
-  group node.box.user
-end
-template "/home/#{node.box.user}/skyped/skyped.conf" do
+template "#{users_home}/skyped/skyped.conf" do
   source "skyped.conf.erb"
   owner node.box.user
   group node.box.user
+  variables(:users_home => users_home)
 end
-template "/home/#{node.box.user}/skyped/skyped.cnf" do
+template "#{users_home}/skyped/skyped.cnf" do
   source "skyped.cnf.erb"
   owner node.box.user
   group node.box.user
+  variables(:users_home => users_home)
 end
-directory "/home/#{node.box.user}/bin" do
+directory "#{users_home}/bin" do
   recursive true
   owner node.box.user
   group node.box.user
 end
-directory "/home/#{node.box.user}/.ssh" do
+directory "#{users_home}/.ssh" do
   recursive true
   owner node.box.user
   group node.box.user
 end
-template "/home/#{node.box.user}/.ssh/authorized_keys" do
+template "#{users_home}/.ssh/authorized_keys" do
+  not_if "test -f #{users_home}/.ssh/authorized_keys"
   source "authorized_keys.erb"
   mode "0600"
 end
-template "/home/#{node.box.user}/bin/xvfb-run-start.sh" do
+template "#{users_home}/bin/xvfb-run-start.sh" do
   source "xvfb-run-start.sh.erb"
   mode "0755"
   owner node.box.user
   group node.box.user
 end
-template "/home/#{node.box.user}/bin/x11vnc-start.sh" do
+template "#{users_home}/bin/x11vnc-start.sh" do
   source "x11vnc-start.sh.erb"
   mode "0755"
   owner node.box.user
   group node.box.user
 end
-template "/home/#{node.box.user}/bin/auto-cert-gen.sh" do
+template "#{users_home}/bin/auto-cert-gen.sh" do
   source "auto-cert-gen.sh.erb"
   mode "0755"
   owner node.box.user
   group node.box.user
+  variables(:users_home => users_home)
 end
-template "/home/#{node.box.user}/bin/skyped-start.sh" do
+template "#{users_home}/bin/skyped-start.sh" do
   source "skyped-start.sh.erb"
   mode "0755"
   owner node.box.user
   group node.box.user
+  variables(:users_home => users_home)
 end
-template "/home/#{node.box.user}/.monitrc" do
+template "#{users_home}/.monitrc" do
   source ".monitrc.erb"
   mode "0600"
   owner node.box.user
   group node.box.user
+  variables(:users_home => users_home)
 end
 service "dbus" do
   action :start
@@ -75,24 +88,25 @@ bash "run skype openssl cert generation using expect script" do
   #not_if "test -f /home/#{node.box.user}/skyped/skyped.key.pem"
   user node.box.user 
   group node.box.user
-  code "/home/#{node.box.user}/bin/auto-cert-gen.sh"
+  code "#{users_home}/bin/auto-cert-gen.sh"
 end
 bash "run xvfb" do
-  not_if "test -f /home/#{node.box.user}/Xvfb.pid"
-  environment "HOME" => "/home/#{node.box.user}", "USER" => node.box.user, "TERM" => "xterm", "SHELL" => "/bin/bash"
+  not_if "test -f #{users_home}/Xvfb.pid"
+  environment "HOME" => users_home, "USER" => node.box.user, "TERM" => "xterm", "SHELL" => "/bin/bash"
   user node.box.user
   group node.box.user
-  code "/home/#{node.box.user}/bin/xvfb-run-start.sh start"
+  code "#{users_home}/bin/xvfb-run-start.sh start"
 end
 bash "run x11vnc" do
-  environment "HOME" => "/home/#{node.box.user}"
+  not_if "test -f #{users_home}/x11vnc.pid"
+  environment "HOME" => users_home
   user node.box.user
   group node.box.user
-  code "/home/#{node.box.user}/bin/x11vnc-start.sh"
+  code "#{users_home}/bin/x11vnc-start.sh"
 end
 bash "run monit (skyped)" do
-  environment "HOME" => "/home/#{node.box.user}"
+  environment "HOME" => users_home 
   user node.box.user
   group node.box.user
-  code "/usr/sbin/monit -l /home/#{node.box.user}/monit.log"
+  code "/usr/sbin/monit -l #{users_home}/monit.log"
 end
