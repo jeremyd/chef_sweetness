@@ -1,4 +1,3 @@
-
 if node.platform == 'ubuntu' && node.platform_version == '11.04'
   template "/etc/apt/sources.list" do
     source "sources.list.erb"
@@ -7,6 +6,8 @@ if node.platform == 'ubuntu' && node.platform_version == '11.04'
   bash "apt-get update" do
     code "apt-get update"
   end
+
+  package 'dbus'
   
   package 'appmenu-qt'
   

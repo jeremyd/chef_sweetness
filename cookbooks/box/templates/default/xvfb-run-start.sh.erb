@@ -27,7 +27,7 @@ case "$1" in
         $PROG $PROG_OPTIONS>>$PROG_OUTPUT 2>&1 &
         disown -ar
         /bin/sleep 5
-	DISPLAY=:0 $WIN_MANAGER 2>&1 &
+	      DISPLAY=:0 $WIN_MANAGER>>$PROG_OUTPUT 2>&1 &
         RETVAL=$?
         if [ $RETVAL -eq 0 ]; then
             pidof -o  %PPID -x Xvfb > ~/bin/Xvfb.pid
