@@ -13,4 +13,4 @@ attribute "box/user", :display_name => "Username you want to use to login to you
 attribute "box/authorized_keys", :display_name => "Authorized keys file in ~/.ssh/authorized_keys for user", :type => "string", :required => false, :recipes => all_recipes
 attribute "box/skype_username", :display_name => "Your Skype username is required for use of l33tbox with Skype.", :type => "string", :required => false, :recipes => all_recipes
 attribute "box/skype_password", :display_name => "Your Skype password is required for use of l33tbox with Skype.  It will only be stored on the box as a SHA1 hash.", :type => "string", :required => false, :recipes => all_recipes
-attribute "box/startup", :display_name => "Optionally startup the services", :type => "string", :required => true, :default => "true", :recipes => all_recipes
+attribute "box/startup", :display_name => "Optionally startup the services", :type => "string", :default => "true", :recipes => all_recipes

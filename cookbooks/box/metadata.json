@@ -62,7 +62,7 @@
         "display_name": "Username you want to use to login to your l33tbox"
       },
       "box/startup": {
-        "required": "required",
+        "required": "optional",
         "calculated": false,
         "choice": [
 
