@@ -7,6 +7,8 @@ if node.platform == 'ubuntu' && node.platform_version == '11.04'
     code "apt-get update"
   end
 
+  package 'znc'
+
   package 'dbus'
   
   package 'appmenu-qt'
