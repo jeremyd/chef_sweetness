@@ -61,6 +61,20 @@
         ],
         "display_name": "Username you want to use to login to your l33tbox"
       },
+      "box/startup": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "true",
+        "type": "string",
+        "recipes": [
+          "box::packages",
+          "box::templates"
+        ],
+        "display_name": "Optionally startup the services"
+      },
       "box/skype_password": {
         "required": "optional",
         "calculated": false,

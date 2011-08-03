@@ -84,29 +84,31 @@ end
 service "dbus" do
   action :start
 end
-bash "run skype openssl cert generation using expect script" do
-  #not_if "test -f /home/#{node.box.user}/skyped/skyped.key.pem"
-  user node.box.user 
-  group node.box.user
-  code "#{users_home}/bin/auto-cert-gen.sh"
-end
-bash "run xvfb" do
-  not_if "test -f #{users_home}/Xvfb.pid"
-  environment "HOME" => users_home, "USER" => node.box.user, "TERM" => "xterm", "SHELL" => "/bin/bash"
-  user node.box.user
-  group node.box.user
-  code "#{users_home}/bin/xvfb-run-start.sh start"
-end
-bash "run x11vnc" do
-  not_if "test -f #{users_home}/x11vnc.pid"
-  environment "HOME" => users_home
-  user node.box.user
-  group node.box.user
-  code "#{users_home}/bin/x11vnc-start.sh"
-end
-bash "run monit (skyped)" do
-  environment "HOME" => users_home 
-  user node.box.user
-  group node.box.user
-  code "/usr/sbin/monit -l #{users_home}/monit.log"
+if node.box.startup == "true"
+  bash "run skype openssl cert generation using expect script" do
+    #not_if "test -f /home/#{node.box.user}/skyped/skyped.key.pem"
+    user node.box.user 
+    group node.box.user
+    code "#{users_home}/bin/auto-cert-gen.sh"
+  end
+  bash "run xvfb" do
+    not_if "test -f #{users_home}/Xvfb.pid"
+    environment "HOME" => users_home, "USER" => node.box.user, "TERM" => "xterm", "SHELL" => "/bin/bash"
+    user node.box.user
+    group node.box.user
+    code "#{users_home}/bin/xvfb-run-start.sh start"
+  end
+  bash "run x11vnc" do
+    not_if "test -f #{users_home}/x11vnc.pid"
+    environment "HOME" => users_home
+    user node.box.user
+    group node.box.user
+    code "#{users_home}/bin/x11vnc-start.sh"
+  end
+  bash "run monit (skyped)" do
+    environment "HOME" => users_home 
+    user node.box.user
+    group node.box.user
+    code "/usr/sbin/monit -l #{users_home}/monit.log"
+  end
 end
