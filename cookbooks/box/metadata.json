@@ -65,7 +65,8 @@
         "required": "optional",
         "calculated": false,
         "choice": [
-
+          "true",
+          "false"
         ],
         "default": "true",
         "type": "string",
