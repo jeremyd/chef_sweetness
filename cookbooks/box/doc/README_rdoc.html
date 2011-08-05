@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: README.rdoc [RDoc Documentation]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1>Skype bot howto:</h1>
+<h2>Description</h2>
+<p>
+Take charge of your Skype chat communication by using this IRC bouncer for
+all instant messaging.  (Including Skype, AIM, GTALK, Jabber, MSN, yahoo,
+and more!).  IRC clients remain king of configurability and notification
+settings.
+</p>
+<h2>Clients: </h2>
+<p>
+An IRC client is all that&#8217;s needed to communicate!  Never miss a
+message again.
+</p>
+<h4>Android</h4>
+<pre>
+  Recommended: Counter Culture IRC ($4.99)
+</pre>
+<h4>IPhone</h4>
+<pre>
+  Recommended: colloquy for iphone
+</pre>
+<h4>Archlinux</h4>
+<pre>
+  Recommended: xchat-svn (with gnome-shell)
+</pre>
+<h4>OSX</h4>
+<pre>
+  Recommended: colloquy or xchat-aqua
+</pre>
+<h2>Install</h2>
+<h4>Installing with RightScale (chef)</h4>
+<p>
+RightScale (free) user?  Take an easy test drive with this [<a
+href="http://www.rightscale.com/library/server_templates/Skype-bot-platform/22707">www.rightscale.com/library/server_templates/Skype-bot-platform/22707</a>)
+</p>
+<h4>Installing with chef</h4>
+<p>
+Use regular methods of bootstrapping with chef+solo.  See metadata.rb for
+configuration options.
+</p>
+<h2>QuickStart</h2>
+<p>
+You will need to run the following commands to setup skype for the first
+time in a VNC session.
+</p>
+<pre>
+  ssh ec2_your_server.hostname -L 5900:localhost:5900
+  
+</pre>
+<p>
+Use your favorite vnc client to connect to localhost:5900.  I use
+gvncviewer.
+</p>
+<pre>
+  gvncviewer localhost
+</pre>
+<p>
+You will be using blackbox window manager.  Right click to open an xterm.
+</p>
+<pre>
+  skype &amp;
+</pre>
+<p>
+Setup skype for the first time and check &#8220;remember password&#8221;.
+</p>
+<p>
+Skype will continue running.  Then start monit to monitor a new daemon
+called skyped.
+</p>
+<pre>
+  /usr/sbin/monit -l /home/myuser/monit.log
+  tail -20 /home/myuser/monit.log #is it able to successfully run skyped?
+</pre>
+<p>
+Now skyped is running.  Restart bitlbee daemon (as root).
+</p>
+<pre>
+  /etc/init.d/bitlbee restart
+</pre>
+<p>
+Now install and configure znc.
+</p>
+<pre>
+  apt-get install znc
+  znc --makeconf
+</pre>
+<p>
+Use znc listen port of your choice, you will need to use an open port.
+Follow the interactive instructions and when prompted for
+&#8220;server&#8221; to connect to use &#8216;127.0.0.1&#8216;
+</p>
+<h4>Talking to your new personal assistant @root of &amp;bitlbee</h4>
+<p>
+Use your favorite IRC client to connect to
+ec2_your_server.hostname:znc_port .  Follow the bitlbee bot&#8217;s
+instructions to register a new account and add your favorite instant
+messaging servers to the configuration.  See [<a
+href="http://bitlbee.org">bitlbee.org</a>] for more documentation.  The znc
+bouncer will keep you connected and online while on the go.
+</p>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+

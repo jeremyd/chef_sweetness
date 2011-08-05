@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Wed Aug 03 19:00:06 -0700 2011</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Skype bot howto:</h1>
+<h2>Description</h2>
+<pre>
+  Take charge of your Skype chat communication by using this IRC bouncer for all instant messaging.  (Including Skype, AIM, GTALK, Jabber, MSN, yahoo, and more!).  IRC clients remain king of configurability and notification settings.
+</pre>
+<h2>IRC client is all that&#8216;s needed to communicate! Never miss a message again.</h2>
+<h4>Android</h4>
+<pre>
+  Recommended: Counter Culture IRC ($4.99)
+</pre>
+<h4>IPhone</h4>
+<pre>
+  Recommended: ?
+</pre>
+<h2>Install</h2>
+<h4>Installing with RightScale (chef)</h4>
+<pre>
+  RightScale (free) user?  Take an easy test drive with this ServerTemplate[http://www.rightscale.com/library/server_templates/Skype-bot-platform/22707]
+</pre>
+<h4>Installing with chef</h4>
+<pre>
+  Use regular methods of bootstrapping with chef+solo.  See metadata.rb for configuration options.
+</pre>
+<h2>QuickStart</h2>
+<p>
+You will need to run the following commands to setup skype for the first
+time in a VNC session.
+</p>
+<pre>
+  ssh ec2_your_server.hostname -L 5900:localhost:5900
+</pre>
+<p>
+Use your favorite vnc client to connect to localhost:5900. I use
+gvncviewer.
+</p>
+<pre>
+  gvncviewer localhost
+</pre>
+<p>
+You will be using blackbox window manager. Right click to open an xterm.
+</p>
+<pre>
+  skype &amp;
+</pre>
+<p>
+Setup skype for the first time and check &quot;remember password&quot;.
+</p>
+<p>
+Skype will continue running. Then start monit to monitor a new daemon
+called skyped.
+</p>
+<pre>
+  /usr/sbin/monit -l /home/myuser/monit.log
+  tail -20 /home/myuser/monit.log #is it able to successfully run skyped?
+</pre>
+<p>
+Now skyped is running. Restart bitlbee daemon (as root).
+</p>
+<pre>
+  /etc/init.d/bitlbee restart
+</pre>
+<p>
+Now install and configure znc.
+</p>
+<pre>
+  apt-get install znc
+  znc --makeconf
+</pre>
+<p>
+Use znc listen port of your choice, you will need to use an open port.
+Follow the interactive instructions and when prompted for
+&quot;server&quot; to connect to use &#8216;127.0.0.1&#8216;
+</p>
+<p>
+Use your favorite IRC client to connect to
+ec2_your_server.hostname:znc_port . Follow instructions to register with
+[<a href="http://bitlbee.org/](Bitlbee">bitlbee.org/](Bitlbee</a>)
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

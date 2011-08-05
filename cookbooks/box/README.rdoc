@@ -1,8 +1,57 @@
-= DESCRIPTION:
+= Skype bot howto:
+== Description
+Take charge of your Skype chat communication by using this IRC bouncer for all instant messaging.  (Including Skype, AIM, GTALK, Jabber, MSN, yahoo, and more!).  IRC clients remain king of configurability and notification settings.
 
-= REQUIREMENTS:
+== Clients: 
+An IRC client is all that's needed to communicate!  Never miss a message again.
+==== Android
+  Recommended: Counter Culture IRC ($4.99)
+==== IPhone
+  Recommended: colloquy for iphone
+==== Archlinux
+  Recommended: xchat-svn (with gnome-shell)
+==== OSX
+  Recommended: colloquy or xchat-aqua
 
-= ATTRIBUTES: 
+== Install
+==== Installing with RightScale (chef)
+RightScale (free) user?  Take an easy test drive with this [http://www.rightscale.com/library/server_templates/Skype-bot-platform/22707)
 
-= USAGE:
+==== Installing with chef
+Use regular methods of bootstrapping with chef+solo.  See metadata.rb for configuration options.
 
+== QuickStart
+You will need to run the following commands to setup skype for the first time in a VNC session.
+
+  ssh ec2_your_server.hostname -L 5900:localhost:5900
+  
+Use your favorite vnc client to connect to localhost:5900.  I use gvncviewer.
+
+  gvncviewer localhost
+
+You will be using blackbox window manager.  Right click to open an xterm.
+
+  skype &
+
+Setup skype for the first time and check "remember password".
+
+Skype will continue running.  Then start monit to monitor a new daemon called skyped.
+
+  /usr/sbin/monit -l /home/myuser/monit.log
+  tail -20 /home/myuser/monit.log #is it able to successfully run skyped?
+
+Now skyped is running.  Restart bitlbee daemon (as root).
+
+  /etc/init.d/bitlbee restart
+
+Now install and configure znc.
+
+  apt-get install znc
+  znc --makeconf
+
+Use znc listen port of your choice, you will need to use an open port.
+Follow the interactive instructions and when prompted for "server" to connect to use '127.0.0.1'
+
+==== Talking to your new personal assistant @root of &bitlbee
+
+Use your favorite IRC client to connect to ec2_your_server.hostname:znc_port .  Follow the bitlbee bot's instructions to register a new account and add your favorite instant messaging servers to the configuration.  See [http://bitlbee.org] for more documentation.  The znc bouncer will keep you connected and online while on the go.
