@@ -1,14 +1,15 @@
 if node.platform == 'ubuntu' && node.platform_version == '11.04'
 
-  if node.cloud.provider == "ec2"
-    template "/etc/apt/sources.list" do
-      source "sources.list.ec2.erb"
-    end
-  else
+  # This would only work in the west.. for now just use external mirror by default
+  #if node.cloud.provider == "ec2"
+  #  template "/etc/apt/sources.list" do
+  #    source "sources.list.ec2.erb"
+  #  end
+  #else
     template "/etc/apt/sources.list" do
       source "sources.list.erb"
     end
-  end
+  #end
 
   bash "apt-get update" do
     code "apt-get update"
