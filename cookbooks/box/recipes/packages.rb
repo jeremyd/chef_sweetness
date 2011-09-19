@@ -1,9 +1,14 @@
 if node.platform == 'ubuntu' && node.platform_version == '11.04'
 
-# This isn't necessary on EC2, and also kernel.org is down
-#  template "/etc/apt/sources.list" do
-#    source "sources.list.erb"
-#  end
+  if node.cloud.provider == "ec2"
+    template "/etc/apt/sources.list" do
+      source "sources.list.ec2.erb"
+    end
+  else
+    template "/etc/apt/sources.list" do
+      source "sources.list.erb"
+    end
+  end
 
   bash "apt-get update" do
     code "apt-get update"
