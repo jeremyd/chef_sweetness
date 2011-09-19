@@ -1,7 +1,9 @@
 if node.platform == 'ubuntu' && node.platform_version == '11.04'
-  template "/etc/apt/sources.list" do
-    source "sources.list.erb"
-  end
+
+# This isn't necessary on EC2, and also kernel.org is down
+#  template "/etc/apt/sources.list" do
+#    source "sources.list.erb"
+#  end
 
   bash "apt-get update" do
     code "apt-get update"

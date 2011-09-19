@@ -20,6 +20,15 @@ RightScale (free) user?  Take an easy test drive with this [http://www.rightscal
 ==== Installing with chef
 Use regular methods of bootstrapping with chef+solo.  See metadata.rb for configuration options.
 
+== Manual Startup Sequence
+
+Start the windows manager and VNC server.
+  ~/bin/xvfb-run-start.sh start
+  ~/bin/x11vnc-start.sh
+
+Manage skyped with monit incase skyped ever crashes.
+  /usr/sbin/monit -l ~/monit.log
+
 == QuickStart
 You will need to run the following commands to setup skype for the first time in a VNC session.
 
